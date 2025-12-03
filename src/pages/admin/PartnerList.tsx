@@ -11,8 +11,6 @@ import {
   Trash2,
   Mail,
   Phone,
-  Globe,
-  Calendar,
   ArrowLeft
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -154,102 +152,91 @@ export default function PartnerList() {
             <CardDescription>All partner entries ({partners.length} total)</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Partner Name</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Contact</TableHead>
-                  <TableHead>Location / Period</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {partners.map((partner) => (
-                  <TableRow key={partner.id}>
-                    <TableCell className="font-medium">
-                      <div className="flex items-center gap-2">
-                        <Building2 className="h-4 w-4 text-muted-foreground" />
-                        <div>
-                          <div>{getPartnerName(partner)}</div>
-                          <div className="text-xs text-muted-foreground line-clamp-1">
-                            {getPartnerDescription(partner)}
-                          </div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      {partner.type_partenaire && (
-                        <Badge variant="outline">{partner.type_partenaire}</Badge>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm space-y-1">
-                        <div className="flex items-center gap-1.5">
-                          <Mail className="h-3 w-3 text-muted-foreground" />
-                          <span className="truncate max-w-[150px]">{partner.email}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <Phone className="h-3 w-3" />
-                          <span>{partner.telephone}</span>
-                        </div>
-                        {partner.site_web && (
-                          <div className="flex items-center gap-1.5 text-muted-foreground">
-                            <Globe className="h-3 w-3" />
-                            <a href={partner.site_web} target="_blank" rel="noopener noreferrer" className="truncate max-w-[150px] hover:text-primary">
-                              {partner.site_web.replace(/^https?:\/\//, '')}
-                            </a>
-                          </div>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-sm">
-                      <div className="space-y-1">
-                        {getPartnerCity(partner) && (
-                          <div className="font-medium">{getPartnerCity(partner)}</div>
-                        )}
-                        {partner.date_deb && partner.date_fin && (
-                          <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
-                            <Calendar className="h-3 w-3" />
-                            <span>
-                              {format(new Date(partner.date_deb), "MMM d, yy")} - {format(new Date(partner.date_fin), "MMM d, yy")}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={partner.actif ? "default" : "secondary"}>
-                        {partner.actif ? "Active" : "Inactive"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex gap-2 justify-end">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => navigate(`/admin/partners/edit/${partner.id}`)}
-                          className="gap-2"
-                        >
-                          <Edit className="h-4 w-4" />
-                          Edit
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleDeleteClick(partner.id!)}
-                          className="gap-2 text-destructive hover:text-destructive"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                          Delete
-                        </Button>
-                      </div>
-                    </TableCell>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[280px] min-w-[200px]">Partner Name</TableHead>
+                    <TableHead className="w-[100px]">Type</TableHead>
+                    <TableHead className="w-[200px]">Contact</TableHead>
+                    <TableHead className="w-[160px]">Location / Period</TableHead>
+                    <TableHead className="w-[80px]">Status</TableHead>
+                    <TableHead className="w-[150px] text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {partners.map((partner) => (
+                    <TableRow key={partner.id}>
+                      <TableCell className="font-medium">
+                        <div className="flex items-start gap-2">
+                          <Building2 className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <div className="font-medium truncate">{getPartnerName(partner)}</div>
+                            <div className="text-xs text-muted-foreground line-clamp-2 max-w-[240px]">
+                              {getPartnerDescription(partner)}
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        {partner.type_partenaire && (
+                          <Badge variant="outline" className="text-xs whitespace-nowrap">{partner.type_partenaire}</Badge>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <div className="text-sm space-y-1">
+                          <div className="flex items-center gap-1.5">
+                            <Mail className="h-3 w-3 text-muted-foreground shrink-0" />
+                            <span className="truncate text-xs">{partner.email}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-muted-foreground">
+                            <Phone className="h-3 w-3 shrink-0" />
+                            <span className="text-xs">{partner.telephone}</span>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-sm">
+                        <div className="space-y-1">
+                          {getPartnerCity(partner) && (
+                            <div className="font-medium text-sm">{getPartnerCity(partner)}</div>
+                          )}
+                          {partner.date_deb && partner.date_fin && (
+                            <div className="text-muted-foreground text-xs">
+                              {format(new Date(partner.date_deb), "MMM yyyy")} - {format(new Date(partner.date_fin), "MMM yyyy")}
+                            </div>
+                          )}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={partner.actif ? "default" : "secondary"} className="text-xs">
+                          {partner.actif ? "Active" : "Inactive"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex gap-1 justify-end">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => navigate(`/admin/partners/edit/${partner.id}`)}
+                            className="h-8 px-2"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteClick(partner.id!)}
+                            className="h-8 px-2 text-destructive hover:text-destructive"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </CardContent>
         </Card>
       </div>
