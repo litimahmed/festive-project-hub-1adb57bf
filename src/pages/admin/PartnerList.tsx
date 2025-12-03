@@ -111,7 +111,7 @@ export default function PartnerList() {
                 Get started by adding your first partner
               </p>
             </div>
-            <Button onClick={() => navigate("/content/partners/create")} size="lg" className="gap-2 mt-4">
+            <Button onClick={() => navigate("/admin/partners/create")} size="lg" className="gap-2 mt-4">
               <Plus className="h-4 w-4" />
               Add Partner
             </Button>
@@ -139,7 +139,7 @@ export default function PartnerList() {
               <p className="text-muted-foreground text-sm">Manage all partner information</p>
             </div>
           </div>
-          <Button onClick={() => navigate("/content/partners/create")} className="gap-2">
+          <Button onClick={() => navigate("/admin/partners/create")} className="gap-2">
             <Plus className="h-4 w-4" />
             Add Partner
           </Button>
@@ -224,7 +224,7 @@ export default function PartnerList() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => navigate(`/content/partners/edit/${partner.id}`)}
+                          onClick={() => navigate(`/admin/partners/edit/${partner.id}`)}
                           className="gap-2"
                         >
                           <Edit className="h-4 w-4" />
