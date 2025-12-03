@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { LayoutDashboard, Users, Settings, BarChart3, Zap, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, List, Layers, ScrollText, Shield } from "lucide-react";
+import { LayoutDashboard, Users, Settings, BarChart3, Zap, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, List, Layers, ScrollText, Shield, Ban } from "lucide-react";
+import { useContacts } from "@/hooks/admin/useContacts";
 import { NavLink } from "@/components/admin/NavLink";
 import { useLocation } from "react-router-dom";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarFooter, useSidebar } from "@/components/ui/sidebar";
@@ -17,6 +18,7 @@ export function AppSidebar() {
   const { open } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
+  const { contact } = useContacts();
   const isActive = (path: string) => currentPath === path;
   const isPathStartsWith = (path: string) => currentPath.startsWith(path);
   
@@ -242,21 +244,31 @@ export function AppSidebar() {
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                         <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <NavLink
-                              to="/admin/contacts/create"
-                              className={`
-                                px-4 py-2 rounded-lg transition-all duration-200
-                                text-muted-foreground hover:text-foreground
-                                hover:bg-muted/50
-                                flex items-center gap-3
-                                text-xs
-                              `}
-                              activeClassName="bg-primary/10 text-primary font-medium"
-                            >
-                              <Plus className="h-3.5 w-3.5" />
-                              <span>Add Contact</span>
-                            </NavLink>
+                          <SidebarMenuButton asChild={!contact}>
+                            {contact ? (
+                              <div
+                                className="px-4 py-2 rounded-lg flex items-center gap-3 text-xs text-muted-foreground/50 cursor-not-allowed"
+                                title="A contact already exists"
+                              >
+                                <Ban className="h-3.5 w-3.5" />
+                                <span>Add Contact</span>
+                              </div>
+                            ) : (
+                              <NavLink
+                                to="/admin/contacts/create"
+                                className={`
+                                  px-4 py-2 rounded-lg transition-all duration-200
+                                  text-muted-foreground hover:text-foreground
+                                  hover:bg-muted/50
+                                  flex items-center gap-3
+                                  text-xs
+                                `}
+                                activeClassName="bg-primary/10 text-primary font-medium"
+                              >
+                                <Plus className="h-3.5 w-3.5" />
+                                <span>Add Contact</span>
+                              </NavLink>
+                            )}
                           </SidebarMenuButton>
                         </SidebarMenuItem>
                       </CollapsibleContent>
