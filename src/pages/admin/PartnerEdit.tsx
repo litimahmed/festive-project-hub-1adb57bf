@@ -29,7 +29,7 @@ const emptyMultilingual: MultilingualField = { ar: "", fr: "", en: "" };
 
 export default function PartnerEdit() {
   const navigate = useNavigate();
-  const { partnerId } = useParams();
+  const { id: partnerId } = useParams();
   const { toast } = useToast();
   const { getPartner, updatePartner: updatePartnerMutation, isUpdating } = usePartners();
   const [fetching, setFetching] = useState(true);
@@ -92,7 +92,7 @@ export default function PartnerEdit() {
         description: "Failed to load partner information",
         variant: "destructive",
       });
-      navigate("/content/partners");
+      navigate("/admin/partners");
     } finally {
       setFetching(false);
     }
@@ -104,7 +104,7 @@ export default function PartnerEdit() {
 
     try {
       await updatePartnerMutation(parseInt(partnerId), formData);
-      navigate("/content/partners");
+      navigate("/admin/partners");
     } catch (error) {
       // Error handling is done in the hook
     }
@@ -131,7 +131,7 @@ export default function PartnerEdit() {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => navigate("/content/partners")}
+          onClick={() => navigate("/admin/partners")}
         >
           <ArrowLeft className="h-5 w-5" />
         </Button>
@@ -404,7 +404,7 @@ export default function PartnerEdit() {
         </Card>
 
         <div className="flex justify-end gap-4">
-          <Button type="button" variant="outline" onClick={() => navigate("/content/partners")}>
+          <Button type="button" variant="outline" onClick={() => navigate("/admin/partners")}>
             Cancel
           </Button>
           <Button type="submit" disabled={isUpdating} size="lg" className="gap-2">
