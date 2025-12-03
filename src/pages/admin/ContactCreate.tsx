@@ -52,7 +52,7 @@ export default function ContactCreate() {
     e.preventDefault();
     try {
       await createContactMutation(formData);
-      navigate("/content/contact");
+      navigate("/admin/contacts");
     } catch (error) {
       // Error handling is done in the hook
     }
@@ -399,7 +399,7 @@ export default function ContactCreate() {
           <Button 
             type="button" 
             variant="outline" 
-            onClick={() => navigate("/content/contact")}
+            onClick={() => navigate("/admin/contacts")}
             className="h-11 px-6"
           >
             Cancel
