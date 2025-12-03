@@ -21,91 +21,75 @@
 
 @layer base {
   /*
-   * Light mode color variables - Corporate Premium Design System
+   * Light mode color variables.
+   * These variables define the default color scheme for the application.
    */
   :root {
-    /* Base colors */
-    --background: 220 20% 97%;
-    --foreground: 222 47% 11%;
+    /* Base colors for the main surface and text */
+    --background: 0 0% 99%;      /* Main page background */
+    --foreground: 182 86% 14%;   /* Main text color */
 
-    /* Card colors - glassmorphism ready */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    /* Card colors for elevated UI elements */
+    --card: 0 0% 99%;
+    --card-foreground: 182 86% 14%;
 
-    /* Popover colors */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    /* Popover colors for floating UI elements */
+    --popover: 0 0% 99%;
+    --popover-foreground: 182 86% 14%;
 
-    /* Primary brand colors - Deep Teal Corporate */
-    --primary: 182 86% 14%;
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 176 40% 40%;
-    --primary-dark: 182 90% 8%;
-    --primary-glow: 176 60% 50%;
+    /* Primary brand colors */
+    --primary: 182 86% 14%;           /* Main brand color (Teal) */
+    --primary-foreground: 0 0% 99%;   /* Text on primary surfaces */
+    --primary-light: 176 28% 35%;     /* Lighter variant for gradients */
+    --primary-dark: 182 90% 10%;      /* Darker variant for emphasis */
 
-    /* Secondary colors */
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary colors for supporting brand elements */
+    --secondary: 176 28% 35%;
+    --secondary-foreground: 0 0% 99%;
 
-    /* Muted colors */
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    /* Muted colors for subtle backgrounds and secondary text */
+    --muted: 155 27% 85%;
+    --muted-foreground: 182 40% 30%;
 
-    /* Accent colors - Vibrant teal */
-    --accent: 174 72% 46%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent colors for highlights and interactive elements */
+    --accent: 174 19% 57%;
+    --accent-foreground: 182 86% 14%;
 
-    /* Destructive colors */
+    /* Destructive colors for error states and dangerous actions */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 99%;
 
-    /* Success colors */
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-
-    /* Warning colors */
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-
-    /* Info colors */
-    --info: 217 91% 60%;
-    --info-foreground: 0 0% 100%;
+    /* Success colors for positive feedback */
+    --success: 174 19% 57%;
+    --success-foreground: 182 86% 14%;
 
     /* UI element colors */
-    --border: 220 13% 91%;
-    --input: 220 14% 96%;
-    --ring: 182 86% 14%;
+    --border: 155 27% 85%;    /* Border color for inputs and cards */
+    --input: 155 20% 90%;     /* Input background color */
+    --ring: 182 86% 14%;      /* Focus ring color */
 
-    /* Premium gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(182, 86%, 14%) 0%, hsl(176, 60%, 30%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(220, 20%, 97%) 0%, hsl(210, 40%, 96%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(220, 20%, 98%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(220, 20%, 99%) 100%);
-    --gradient-sidebar: linear-gradient(180deg, hsl(182, 86%, 12%) 0%, hsl(182, 90%, 8%) 100%);
-    --gradient-mesh: radial-gradient(at 40% 20%, hsl(182, 86%, 14%, 0.08) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, hsl(176, 60%, 50%, 0.06) 0px, transparent 50%),
-                     radial-gradient(at 0% 50%, hsl(182, 86%, 14%, 0.04) 0px, transparent 50%);
+    /* Custom brand gradients for backgrounds and visual interest */
+    --gradient-primary: linear-gradient(135deg, hsl(182, 86%, 14%), hsl(182, 90%, 10%));
+    --gradient-hero: linear-gradient(135deg, hsl(176, 28%, 35%) 0%, hsl(182, 86%, 14%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0, 0%, 99%) 0%, hsl(155, 27%, 90%) 100%);
+    
+    /* Custom shadows for depth and elevation */
+    --shadow-elegant: 0 10px 40px -10px hsl(182 86% 14% / 0.20);  /* Subtle elevation */
+    --shadow-glow: 0 0 60px hsl(174 19% 57% / 0.20);              /* Glow effect */
+    --shadow-card: 0 4px 20px hsl(182 86% 14% / 0.10);            /* Card elevation */
 
-    /* Premium shadows */
-    --shadow-elegant: 0 1px 3px hsl(220 9% 46% / 0.08), 0 4px 14px hsl(220 9% 46% / 0.05);
-    --shadow-glow: 0 0 40px hsl(182 86% 14% / 0.15);
-    --shadow-card: 0 1px 2px hsl(220 9% 46% / 0.06), 0 2px 8px hsl(220 9% 46% / 0.04);
-    --shadow-card-hover: 0 4px 16px hsl(220 9% 46% / 0.1), 0 2px 8px hsl(220 9% 46% / 0.06);
-    --shadow-premium: 0 20px 50px -12px hsl(220 9% 46% / 0.15);
+    /* Consistent border radius for rounded corners */
+    --radius: 0.5rem;
 
-    /* Border radius */
-    --radius: 0.75rem;
-
-    /* Sidebar - Dark premium */
-    --sidebar-background: 182 86% 10%;
-    --sidebar-foreground: 220 14% 96%;
-    --sidebar-primary: 174 72% 46%;
+    /* Sidebar-specific color variables */
+    --sidebar-background: 162 30% 96%;
+    --sidebar-foreground: 188 94% 20%;
+    --sidebar-primary: 188 94% 20%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 182 50% 18%;
-    --sidebar-accent-foreground: 220 14% 96%;
-    --sidebar-border: 182 50% 16%;
-    --sidebar-ring: 174 72% 46%;
-    --sidebar-muted: 182 30% 25%;
+    --sidebar-accent: 162 30% 92%;
+    --sidebar-accent-foreground: 188 94% 20%;
+    --sidebar-border: 162 20% 85%;
+    --sidebar-ring: 188 94% 20%;
   }
 }
 
