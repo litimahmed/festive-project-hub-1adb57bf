@@ -35,6 +35,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { format } from "date-fns";
+import { getMultilingualValue, PartnerResponse } from "@/types/admin/partner";
 
 export default function PartnerList() {
   const navigate = useNavigate();
@@ -60,18 +61,17 @@ export default function PartnerList() {
     }
   };
 
-  const getPartnerName = (partner: typeof partners[0]) => {
-    if (typeof partner.nom_partenaire === 'object') {
-      return partner.nom_partenaire.en || partner.nom_partenaire.fr || partner.nom_partenaire.ar || 'Unnamed';
-    }
-    return partner.nom_partenaire || 'Unnamed';
+  const getPartnerName = (partner: PartnerResponse) => {
+    return getMultilingualValue(partner.nom_partenaire) || 'Unnamed';
   };
 
-  const getPartnerDescription = (partner: typeof partners[0]) => {
-    if (typeof partner.description === 'object') {
-      return partner.description.en || partner.description.fr || partner.description.ar || '';
-    }
-    return partner.description || '';
+  const getPartnerDescription = (partner: PartnerResponse) => {
+    return getMultilingualValue(partner.description) || '';
+  };
+
+  const getPartnerCity = (partner: PartnerResponse) => {
+    if (!partner.adresse || !partner.adresse[0]) return '';
+    return getMultilingualValue(partner.adresse[0].ville);
   };
 
   if (loading) {
@@ -160,7 +160,7 @@ export default function PartnerList() {
                   <TableHead>Partner Name</TableHead>
                   <TableHead>Type</TableHead>
                   <TableHead>Contact</TableHead>
-                  <TableHead>Period</TableHead>
+                  <TableHead>Location / Period</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -205,14 +205,19 @@ export default function PartnerList() {
                       </div>
                     </TableCell>
                     <TableCell className="text-sm">
-                      {partner.date_deb && partner.date_fin && (
-                        <div className="flex items-center gap-1.5 text-muted-foreground">
-                          <Calendar className="h-3 w-3" />
-                          <span>
-                            {format(new Date(partner.date_deb), "MMM d, yy")} - {format(new Date(partner.date_fin), "MMM d, yy")}
-                          </span>
-                        </div>
-                      )}
+                      <div className="space-y-1">
+                        {getPartnerCity(partner) && (
+                          <div className="font-medium">{getPartnerCity(partner)}</div>
+                        )}
+                        {partner.date_deb && partner.date_fin && (
+                          <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
+                            <Calendar className="h-3 w-3" />
+                            <span>
+                              {format(new Date(partner.date_deb), "MMM d, yy")} - {format(new Date(partner.date_fin), "MMM d, yy")}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </TableCell>
                     <TableCell>
                       <Badge variant={partner.actif ? "default" : "secondary"}>
