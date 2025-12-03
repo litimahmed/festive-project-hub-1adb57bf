@@ -82,7 +82,7 @@ export default function ContactList() {
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Add your company's contact details to display on your website.
             </p>
-            <Button onClick={() => navigate("/content/contact/create")} className="gap-2">
+            <Button onClick={() => navigate("/admin/contacts/create")} className="gap-2">
               <Plus className="h-4 w-4" />
               Add Contact Info
             </Button>
@@ -121,7 +121,7 @@ export default function ContactList() {
             </p>
           </div>
         </div>
-        <Button onClick={() => navigate("/content/contact/edit")} variant="default" className="gap-2">
+        <Button onClick={() => navigate("/admin/contacts/edit")} variant="default" className="gap-2">
           <Edit className="h-4 w-4" />
           Edit Details
         </Button>
