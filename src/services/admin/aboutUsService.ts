@@ -96,7 +96,7 @@ export const updateAboutUs = async (
 export const toggleAboutUsActive = async (aboutId: string): Promise<AboutNousResponse> => {
   const accessToken = localStorage.getItem("accessToken");
   const response = await fetch(`${ADMINS_URL}/AboutNous/activate/${aboutId}/`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
       ...(accessToken && { "Authorization": `Bearer ${accessToken}` }),

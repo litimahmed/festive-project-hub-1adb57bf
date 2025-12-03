@@ -132,8 +132,12 @@ export default function AboutUsVersions() {
               <TableBody>
                 {versions.map((version) => {
                   const isActive = version.active === "true" || version.active === "1" || version.active === true as any;
-                  // Use about_id if available, fallback to id
-                  const versionId = version.about_id || String(version.id);
+                  // Use about_id if available, fallback to id - log for debugging
+                  console.log("Version data:", version);
+                  const versionId = version.about_id || (version as any).pk || (version.id ? String(version.id) : null);
+                  if (!versionId) {
+                    console.error("No valid ID found for version:", version);
+                  }
                   return (
                     <TableRow key={version.id} className={isActive ? "bg-primary/5" : ""}>
                       <TableCell className="font-medium">
@@ -183,7 +187,8 @@ export default function AboutUsVersions() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => navigate(`/admin/about-us/edit/${versionId}`)}
+                            onClick={() => versionId && navigate(`/admin/about-us/edit/${versionId}`)}
+                            disabled={!versionId}
                             className="gap-1.5"
                           >
                             <Pencil className="h-4 w-4" />
@@ -192,8 +197,8 @@ export default function AboutUsVersions() {
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handleActivate(versionId)}
-                            disabled={isActive || isToggling}
+                            onClick={() => versionId && handleActivate(versionId)}
+                            disabled={isActive || isToggling || !versionId}
                             className={isActive 
                               ? "gap-1.5 text-muted-foreground border-muted cursor-not-allowed opacity-50" 
                               : "gap-1.5 text-green-600 hover:text-green-700 hover:bg-green-50 border-green-200"
