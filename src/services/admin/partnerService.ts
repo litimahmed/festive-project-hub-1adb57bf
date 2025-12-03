@@ -17,7 +17,9 @@ export const getAllPartners = async (): Promise<PartnerResponse[]> => {
     throw new Error(errorData.message || "Failed to fetch partners.");
   }
 
-  const data = await response.json();
+  const result = await response.json();
+  // Handle wrapped response: {message: "...", data: [...]}
+  const data = result.data || result;
   return Array.isArray(data) ? data : [data];
 };
 
