@@ -12,7 +12,8 @@ import {
   Mail,
   Phone,
   Globe,
-  Calendar
+  Calendar,
+  ArrowLeft
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -83,11 +84,19 @@ export default function PartnerList() {
 
   if (!partners || partners.length === 0) {
     return (
-      <div className="space-y-6 max-w-4xl mx-auto">
-        <div className="flex items-center justify-between">
+      <div className="space-y-6 max-w-4xl mx-auto py-6 px-2">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/admin/dashboard")}
+            className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Partners</h2>
-            <p className="text-muted-foreground">No partners found</p>
+            <h2 className="text-2xl font-semibold tracking-tight">Partners</h2>
+            <p className="text-muted-foreground text-sm">No partners found</p>
           </div>
         </div>
 
@@ -114,11 +123,21 @@ export default function PartnerList() {
 
   return (
     <>
-      <div className="space-y-6 max-w-7xl mx-auto">
+      <div className="space-y-6 max-w-7xl mx-auto py-6 px-2">
         <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight">Partners</h2>
-            <p className="text-muted-foreground">Manage all partner information</p>
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/admin/dashboard")}
+              className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight">Partners</h2>
+              <p className="text-muted-foreground text-sm">Manage all partner information</p>
+            </div>
           </div>
           <Button onClick={() => navigate("/content/partners/create")} className="gap-2">
             <Plus className="h-4 w-4" />
