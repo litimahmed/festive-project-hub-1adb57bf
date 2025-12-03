@@ -188,16 +188,21 @@ export default function ContactEdit() {
                   Landline
                   <span className="text-destructive">*</span>
                 </Label>
-                <Input
-                  id="telephone_fixe"
-                  type="tel"
-                  required
-                  value={formData.telephone_fixe}
-                  onChange={(e) => setFormData(prev => ({ ...prev, telephone_fixe: e.target.value }))}
-                  placeholder="+213 XX XX XX XX"
-                  maxLength={20}
-                  className="h-11"
-                />
+                <div className="flex">
+                  <span className="inline-flex items-center px-3 h-11 text-sm font-medium text-muted-foreground bg-muted border border-r-0 border-input rounded-l-md">
+                    +213
+                  </span>
+                  <Input
+                    id="telephone_fixe"
+                    type="tel"
+                    required
+                    value={formData.telephone_fixe}
+                    onChange={(e) => setFormData(prev => ({ ...prev, telephone_fixe: e.target.value }))}
+                    placeholder="XX XX XX XX"
+                    maxLength={20}
+                    className="h-11 rounded-l-none"
+                  />
+                </div>
               </div>
             </div>
           </CardContent>
