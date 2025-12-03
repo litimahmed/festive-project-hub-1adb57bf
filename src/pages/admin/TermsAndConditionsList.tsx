@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,8 +10,10 @@ import { MultilingualInput } from "@/components/admin/MultilingualInput";
 import { useTermsAndConditions } from "@/hooks/admin/useTermsAndConditions";
 import { TermsAndConditions } from "@/types/admin/termsAndConditions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft } from "lucide-react";
 
 export default function TermsAndConditionsList() {
+  const navigate = useNavigate();
   const { termsAndConditions, isLoading, updateTermsAndConditions, isUpdating } =
     useTermsAndConditions();
   const [selectedVersion, setSelectedVersion] = useState<TermsAndConditions | null>(null);
@@ -40,10 +43,25 @@ export default function TermsAndConditionsList() {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-6 px-2 space-y-6">
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/admin/dashboard")}
+          className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Terms & Conditions</h1>
+          <p className="text-muted-foreground text-sm">Manage your terms and conditions versions</p>
+        </div>
+      </div>
+
       <Card>
         <CardHeader>
-          <CardTitle>Terms and Conditions</CardTitle>
+          <CardTitle className="text-base font-medium">Policy Versions</CardTitle>
         </CardHeader>
         <CardContent>
           {!termsAndConditions || termsAndConditions.length === 0 ? (

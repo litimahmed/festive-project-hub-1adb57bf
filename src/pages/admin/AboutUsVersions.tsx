@@ -66,7 +66,7 @@ export default function AboutUsVersions() {
   };
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto p-6">
+    <div className="space-y-6 max-w-6xl mx-auto py-6 px-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Button

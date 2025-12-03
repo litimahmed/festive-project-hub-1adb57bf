@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,8 +10,10 @@ import { MultilingualInput } from "@/components/admin/MultilingualInput";
 import { usePrivacyPolicy } from "@/hooks/admin/usePrivacyPolicy";
 import { PrivacyPolicy } from "@/types/admin/privacyPolicy";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft } from "lucide-react";
 
 export default function PrivacyPolicyList() {
+  const navigate = useNavigate();
   const { privacyPolicies, isLoading, updatePrivacyPolicy, isUpdating } =
     usePrivacyPolicy();
   const [editablePolicies, setEditablePolicies] = useState<PrivacyPolicy[]>([]);
@@ -54,10 +57,25 @@ export default function PrivacyPolicyList() {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-6 px-2 space-y-6">
+      <div className="flex items-center gap-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/admin/dashboard")}
+          className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">Privacy Policy</h1>
+          <p className="text-muted-foreground text-sm">Manage your privacy policy versions</p>
+        </div>
+      </div>
+
       <Card>
         <CardHeader>
-          <CardTitle>Privacy Policy</CardTitle>
+          <CardTitle className="text-base font-medium">Policy Versions</CardTitle>
         </CardHeader>
         <CardContent>
           {!editablePolicies || editablePolicies.length === 0 ? (

@@ -7,7 +7,8 @@ import {
   MapPin, 
   Phone, 
   Mail, 
-  Clock, 
+  Clock,
+  ArrowLeft,
   Globe, 
   Building2,
   Facebook,
@@ -101,14 +102,24 @@ export default function ContactList() {
   ].filter((link) => link.value);
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
+    <div className="space-y-6 max-w-6xl mx-auto py-6 px-2">
       {/* Page Header */}
       <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Contact Management</h1>
-          <p className="text-muted-foreground text-sm mt-1">
-            View and manage your organization's contact information
-          </p>
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/admin/dashboard")}
+            className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight">Contact Management</h1>
+            <p className="text-muted-foreground text-sm mt-1">
+              View and manage your organization's contact information
+            </p>
+          </div>
         </div>
         <Button onClick={() => navigate("/content/contact/edit")} variant="default" className="gap-2">
           <Edit className="h-4 w-4" />
